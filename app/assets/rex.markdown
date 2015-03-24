@@ -105,7 +105,6 @@ background-image: url(images/kenobi.jpg)
 
 # Le coté clair
 
-
 ---
 
 ## Le Front s'organise...
@@ -139,22 +138,41 @@ background-image: url(images/yoda.jpg)
 
 Grunt, Gulp, Brunch...
 
+---
+
 ## Minifier tôt
+
+---
 
 ## GuideLine, Structure, et Refactoring
 
+---
+
 ## Découpler, encore... et encore... et encore...
+
+---
 
 ## Tester
 
+---
+
 ## Le jeu des Events
+
+---
 
 ## Gestion d'exceptions
 
 ---
 
+class: title
+background-image: url(images/dolorian.jpg)
+
 # Futur et Evolution ?
 
+---
+
 ## Angular V2
+
+---
 
 ## TypeScript ?
