@@ -1,0 +1,19 @@
+{
+  "name": "rex-angular",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Armaklan/angular-rex",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "remark": "~0.10.2",
+    "animate.css": "~3.2.6",
+    "font-awesome": "~4.3.0"
+  }
+}

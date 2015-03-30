@@ -83,7 +83,7 @@ background-image: url(images/palpatine.jpg)
 
 ## Un gain de temps
 
-![Vue d'ensemble](images/montre.jpg)
+![Vue d'ensemble](images/montre.png)
 
 ### Une technologie en plus = une complexité en plus.
 ### Les fonctionnalitées à implémenter reste les mêmes...
@@ -209,8 +209,6 @@ class: inverse
 
 ---
 
-class: inverse
-
 ## Découpler
 ###encore...
 ####et encore...
@@ -218,13 +216,9 @@ class: inverse
 
 ---
 
-class: inverse
-
 ######et encore...
 
 ---
-
-class: inverse
 
 ## Découpler
 
@@ -237,16 +231,12 @@ class: inverse
 
 ---
 
-class: inverse
-
 ## Tester
 ### Unitaire et End-to-End
 
 ![Jasmine](images/jasmine.png)    ![Protractor](images/protractor.png)
 
 ---
-
-class: inverse
 
 ## Controller As ...
 
@@ -278,9 +268,134 @@ function myCtrl($scope) {
 
 ## Le jeu des Events
 
+![Problematique](images/convergence2.jpg)
+
+---
+
+class: inverse
+
+## Tout dans le controller
+
+```JS
+function MyCtrl() {
+
+    this.propositionSelect = propositionSelect;
+    
+    function propositionSelect(proposition) {
+        refreshNotes(proposition);
+        refreshPanier(proposition);
+    }
+    
+    function refreshNotes(proposition) {
+        this.notes = proposition.notes;
+    }
+    
+    function refreshPanier(proposition) {
+        this.panier.cotisation = getBaseCotisation() + proposition.cotisation;
+    }
+
+}
+
+```
+
+---
+
+class: inverse
+
+## En mode service
+
+```JS
+function MyCtrl(Panier, Notes) {
+
+    this.propositionSelect = propositionSelect;
+    
+    function propositionSelect(proposition) {
+        Notes.refresh(proposition);
+        Panier.refresh(proposition);
+    }
+    
+}
+
+function Notes() {
+    this.notes = [];
+    this.refresh = refresh;
+    
+    function refresh(proposition) {
+        this.notes = proposition.notes;
+    }
+}
+
+```
+---
+
+class: inverse
+
+## Evenement
+
+```JS
+function MyCtrl(EventManager) {
+
+    this.propositionSelect = propositionSelect;
+    
+    function propositionSelect(proposition) {
+        EventManager.trigger('proposition-select', proposition);
+    }
+    
+}
+
+function Notes() {
+    this.notes = [];
+    this.refresh = refresh;
+    
+    function refresh(proposition) {
+        this.notes = proposition.notes;
+    }
+}
+
+function notesRun(Notes, EventManager) {
+    EventManager.on('proposition-select', Notes.refresh);
+}
+
+```
+
 ---
 
 ## Gestion d'exceptions
+
+![Blue Screen](images/bluescreen.png)
+
+### Centralisé la gestion - Tracé coté Back-End
+
+---
+
+class: inverse
+
+## Implémentation
+
+```JS
+function ExceptionHandler(EventManager) {
+
+    return new function(e) {
+        EventManager.trigger('error', e);
+    }
+    
+}
+
+function TraceError($http) {
+    this.log = log;
+    
+    function log(e) {
+        $http({
+            url: '/error',
+            data: e
+        });
+    }
+}
+
+function runTraceError(TraceError, EventManager) {
+    EventManager.on('error', TraceError.log(e);
+}
+```
 
 ---
 
@@ -293,6 +408,22 @@ background-image: url(images/dolorian.jpg)
 
 ## Angular V2
 
+![Rupture](images/rupture3.jpg)
+
+Rapprochement d'ECMA 6
+
+Suppression des controllers
+
+Refonte des directives
+
 ---
 
-## TypeScript ?
+## TypeScript
+
+![Rupture](images/typescript.png)
+
+Typage optionnel
+
+Intégration des classes et interfaces
+
+Syntaxe qui reste proche du JS
