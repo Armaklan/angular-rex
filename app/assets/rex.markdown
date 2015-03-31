@@ -15,7 +15,7 @@ background-image: url(images/lune280209_hdr.jpg)
 class: title
 background-image: url(images/iceberg.jpg)
 
-# La Facile visible de l'Iceberg
+# La Face visible de l'Iceberg
 
 ---
 
@@ -97,6 +97,13 @@ background-image: url(images/palpatine.jpg)
 ### L'omniprésence d'anti-pattern
 ### Un Ecosystème en mouvement...
 
+---
+
+## Des problématiques nouvelles
+
+![Wait](images/wait.gif)
+
+### Ou presque...
 
 ---
 
@@ -127,6 +134,18 @@ background-image: url(images/kenobi.jpg)
 
 ---
 
+## Dynamisme et Ergonomie
+
+![Wait](images/dynamisme.jpg)
+
+---
+
+## Prototypage
+
+![Wait](images/proto.jpg)
+
+---
+
 class: title
 background-image: url(images/yoda.jpg)
 
@@ -140,6 +159,31 @@ background-image: url(images/yoda.jpg)
 
 ### Ne faites pas ce que l'ordinateur peut faire pour vous !
 ### Minifier dès le début
+
+---
+
+class: inverse
+
+## Petite parenthèse Brunch
+
+```Coffee
+exports.config =
+    modules:
+        definition: false
+        wrapper: false
+    paths:
+        public: 'public'
+    files:
+        stylesheets:
+            joinTo:
+                'style/app.css': /^app/
+                'style/vendor.css': /^(vendor|bower_components)/,
+        javascripts:
+            joinTo:
+                'js/vendor.js': /^bower_components/
+```
+
+### Less, Concaténation et Minification Js / Css, Watch, et Server
 
 ---
 
@@ -209,7 +253,10 @@ class: inverse
 
 ---
 
-## Découpler
+## Découper votre code
+
+![machette](images/machette.jpg)
+
 ###encore...
 ####et encore...
 #####et encore...
@@ -220,7 +267,7 @@ class: inverse
 
 ---
 
-## Découpler
+## Découper
 
 ### Séparer service d'accès aux données
 ### Et service de transformation des données
@@ -280,16 +327,16 @@ class: inverse
 function MyCtrl() {
 
     this.propositionSelect = propositionSelect;
-    
+
     function propositionSelect(proposition) {
         refreshNotes(proposition);
         refreshPanier(proposition);
     }
-    
+
     function refreshNotes(proposition) {
         this.notes = proposition.notes;
     }
-    
+
     function refreshPanier(proposition) {
         this.panier.cotisation = getBaseCotisation() + proposition.cotisation;
     }
@@ -308,18 +355,18 @@ class: inverse
 function MyCtrl(Panier, Notes) {
 
     this.propositionSelect = propositionSelect;
-    
+
     function propositionSelect(proposition) {
         Notes.refresh(proposition);
         Panier.refresh(proposition);
     }
-    
+
 }
 
 function Notes() {
     this.notes = [];
     this.refresh = refresh;
-    
+
     function refresh(proposition) {
         this.notes = proposition.notes;
     }
@@ -336,17 +383,17 @@ class: inverse
 function MyCtrl(EventManager) {
 
     this.propositionSelect = propositionSelect;
-    
+
     function propositionSelect(proposition) {
         EventManager.trigger('proposition-select', proposition);
     }
-    
+
 }
 
 function Notes() {
     this.notes = [];
     this.refresh = refresh;
-    
+
     function refresh(proposition) {
         this.notes = proposition.notes;
     }
@@ -375,15 +422,16 @@ class: inverse
 ```JS
 function ExceptionHandler(EventManager) {
 
-    return new function(e) {
+    return function(e, cause) {
         EventManager.trigger('error', e);
+        throw e;
     }
-    
+
 }
 
 function TraceError($http) {
     this.log = log;
-    
+
     function log(e) {
         $http({
             url: '/error',
@@ -418,12 +466,20 @@ Refonte des directives
 
 ---
 
+## ECMAScript 6
+
+![Rupture](images/es6.png)
+
+### Module, Lambda, Class
+
+---
+
 ## TypeScript
 
 ![Rupture](images/typescript.png)
 
 Typage optionnel
 
-Intégration des classes et interfaces
+Même avancé que ECMAScript 6
 
 Syntaxe qui reste proche du JS
